@@ -1,0 +1,145 @@
+### Chapter 1: Introduction
+1. *What are the four dimensions that define software architecture?*  
+Software architecture consists of the structure of the system (foundations supporting the architecture), 
+combined with architecture characteristics (“-ilities”) the system must support, architecture decisions, 
+and finally design principles.<br><br>
+
+2. What is the difference between an architecture decision and a design principle?
+Architecture decisions define the rules for how a system should be constructed. A design principle
+differs from an architecture decision in that a design principle is a guideline rather
+than a hard-and-fast rule.<br><br>
+
+3. *List the eight core expectations of a software architect.*  
+Architect should:
+    - Make architecture decisions
+    - Continually analyze the architecture
+    - Keep current with latest trends
+    - Ensure compliance with decisions
+    - Have diverse exposure and experience
+    - Have business domain knowledge
+    - Possess interpersonal skills
+    - Understand and navigate politics<br><br>
+4. *What is the First Law of Software Architecture?*  
+"Everything in software architecture is a trade-off."  
+Alternatively, it can be said that "If an architect thinks they have discovered something that isn’t a trade-off, more likely
+they just haven’t identified the trade-off yet".<br><br>
+
+### Chapter 2: Architectural Thinking
+1. *Describe the traditional approach of architecture versus development and
+explain why that approach no longer works.*  
+(Short answer: traditional approach looks like waterfall: architect builds a set of artifacts, based on which development
+is done, without any feedback loop, revisiting initial assumptions or next iterations. It is completely unfit to modern,
+iterative methodologies for software development.)<br>  
+Long answer:
+Traditionally, an architect is responsible for things like analyzing business requirements to extract and define 
+the architectural characteristics (“-ilities”), selecting which architecture patterns and styles
+would fit the problem domain, and creating components (the building blocks of the system). 
+The artifacts created from these activities are then handed off to the development team, 
+which is responsible for creating class diagrams for each component, creating user interface screens, 
+and developing and testing source code. It is the unidirectional arrow passing though the virtual and physical barriers 
+separating the architect from the developer that causes all of the problems associated with architecture. 
+Decisions an architect makes sometimes never make it to the development teams, and decisions development teams make that
+change the architecture rarely get back to the architect. In this model the architect is disconnected 
+from the development teams, and as such the architecture rarely provides what it was originally set out to do.<br><br>
+
+2. *List the three levels of knowledge in the knowledge triangle and provide an
+example of each.*  
+The top and the smallest one is "what you know". Below that, there is bigger one "what you know you don't know".
+The bottom and the biggest one is "what you don't know you don't know".<br><br>
+
+3. *Why is it more important for an architect to focus on technical breadth rather
+than technical depth?*  
+Because architects must make decisions that match capabilities to technical constraints, a broad understanding
+of a wide variety of solutions is valuable. Architects should focus on technical breadth so that they have a larger
+quiver from which to draw arrows.  
+(But they won't be actually firing those arrows themselves, so they don't need to know every nut and bolt.)<br><br>
+
+4. *What are some of the ways of maintaining your technical depth and remaining
+hands-on as an architect?*  
+(Definitely not taking ownership of a code on a critical path for a project, which would require being both architect
+and lead developer at the same time, probably leading not only to overtime and burnout, but also blocking progress
+in at least one of those two areas. This is called bottleneck trap.)
+There are several ways:
+    - delegate the critical path and framework code to others on the development team and then
+      focus on coding a piece of business functionality (a service or a screen) one to three
+      iterations down the road
+    - do frequent proof-of-concepts (POCs), but strive for production-quality code
+    - tackle some of the technical debt stories or architecture stories, freeing the development team up 
+      to work on the critical functional user stories
+    - working on bug fixes within an iteration
+    - automation by creating simple command-line tools and analyzers to help the development team 
+      with their day-to-day tasks
+    - do frequent code reviews
+    - "practice coding from home"
+    - (cool idea would be to have hackathons where roles are switched, e.g. architects and QAs code while
+      developers architect and test)
+
+### Chapter 3: Modularity
+1. What is meant by the term connascence?
+2. What is the difference between static and dynamic connascence?
+3. What does connascence of type mean? Is it static or dynamic connascence?
+4. What is the strongest form of connascence?
+5. What is the weakest form of connascence?
+6. Which is preferred within a code base—static or dynamic connascence?
+
+### Chapter 4: Architecture Characteristics Defined
+1. What three criteria must an attribute meet to be considered an architecture char‐
+acteristic?
+2. What is the difference between an implicit characteristic and an explicit one?
+Provide an example of each.
+3. Provide an example of an operational characteristic.
+4. Provide an example of a structural characteristic.
+5. Provide an example of a cross-cutting characteristic.
+6. Which architecture characteristic is more important to strive for—availability or
+performance?
+
+### Chapter 5: Identifying Architecture Characteristics
+1. Give a reason why it is a good practice to limit the number of characteristics (“-
+ilities”) an architecture should support.
+2. True or false: most architecture characteristics come from business requirements
+and user stories.
+3. If a business stakeholder states that time-to-market (i.e., getting new features and
+bug fixes pushed out to users as fast as possible) is the most important business
+concern, which architecture characteristics would the architecture need to sup‐
+port?
+4. What is the difference between scalability and elasticity?
+5. You find out that your company is about to undergo several major acquisitions to
+significantly increase its customer base. Which architectural characteristics
+should you be worried about?
+
+### Chapter 6: Measuring and Governing Architecture Characteristics
+1. Why is cyclomatic complexity such an important metric to analyze for architec‐
+ture?
+2. What is an architecture fitness function? How can they be used to analyze an
+architecture?
+3. Provide an example of an architecture fitness function to measure the scalability
+of an architecture.
+4. What is the most important criteria for an architecture characteristic to allow
+architects and developers to create fitness functions?
+
+### Chapter 7: Scope of Architecture Characteristics
+1. What is an architectural quantum, and why is it important to architecture?
+2. Assume a system consisting of a single user interface with four independently
+deployed services, each containing its own separate database. Would this system
+have a single quantum or four quanta? Why?
+3. Assume a system with an administration portion managing static reference data
+(such as the product catalog, and warehouse information) and a customer-facing
+portion managing the placement of orders. How many quanta should this system
+be and why? If you envision multiple quanta, could the admin quantum and
+customer-facing quantum share a database? If so, in which quantum would the
+database need to reside?
+
+### Chapter 8: Component-Based Thinking
+1. We define the term component as a building block of an application—something
+the application does. A component usually consist of a group of classes or source
+files. How are components typically manifested within an application or service?
+2. What is the difference between technical partitioning and domain partitioning?
+Provide an example of each.
+3. What is the advantage of domain partitioning?
+4. Under what circumstances would technical partitioning be a better choice over
+domain partitioning?
+5. What is the entity trap? Why is it not a good approach for component
+identification?
+
+6. When might you choose the workflow approach over the Actor/Actions
+approach when identifying core components?
