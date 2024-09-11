@@ -19,6 +19,7 @@ Architect should:
     - Have business domain knowledge
     - Possess interpersonal skills
     - Understand and navigate politics<br><br>
+
 4. *What is the First Law of Software Architecture?*  
 "Everything in software architecture is a trade-off."  
 Alternatively, it can be said that "If an architect thinks they have discovered something that isn’t a trade-off, more likely
@@ -75,41 +76,94 @@ There are several ways:
       developers architect and test)
 
 ### Chapter 3: Modularity
-1. What is meant by the term connascence?
-2. What is the difference between static and dynamic connascence?
-3. What does connascence of type mean? Is it static or dynamic connascence?
-4. What is the strongest form of connascence?
-5. What is the weakest form of connascence?
-6. Which is preferred within a code base—static or dynamic connascence?
+1. *What is meant by the term connascence?*  
+"Two components are connascent if a change in one would require the other to be
+modified in order to maintain the overall correctness of the system."  
+Meilir Page-Jones<br><br>
+
+2. *What is the difference between static and dynamic connascence?*  
+Static connascence refers to source-code-level coupling, while dynamic connascence refers to execution-time
+coupling.<br><br>
+
+3. *What does connascence of type mean? Is it static or dynamic connascence?*  
+CoT is a static connascence meaning that multiple components must agree on the type of an entity. 
+Typically in statically typed languages this is checked at compile-time.  
+In Python I think it's more a connascence of interface/protocol, which can be checked before runtime, 
+but might also result in runtime errors.<br><br>
+
+4. *What is the strongest form of connascence?*  
+Strength of connascence is defined by the ease with which a developer can refactor that type of coupling.
+Dynamic connascence is stronger than static connascence, and out of all types of dynamic connascence the strongest is
+Connascence of Identity (CoI), which occurs when multiple components must reference the same entity.<br><br>
+
+5. *What is the weakest form of connascence?*  
+Connascence of Name (CoN) - multiple components must agree on the name of an entity.
+Names of methods represents the most common way that code bases are coupled
+and the most desirable, especially in light of modern refactoring tools that make
+system-wide name changes trivial.<br><br>
+
+6. *Which is preferred within a code base—static or dynamic connascence?*  
+Static connascence is strongly preferred, as it is much easier to analyze call graph over  runtime calls.
+Maybe with better tooling and observability this wouldn't be as much of an issue.
 
 ### Chapter 4: Architecture Characteristics Defined
-1. What three criteria must an attribute meet to be considered an architecture char‐
-acteristic?
-2. What is the difference between an implicit characteristic and an explicit one?
-Provide an example of each.
-3. Provide an example of an operational characteristic.
-4. Provide an example of a structural characteristic.
-5. Provide an example of a cross-cutting characteristic.
-6. Which architecture characteristic is more important to strive for—availability or
-performance?
+1. *What three criteria must an attribute meet to be considered an architecture characteristic?*  
+    - Specifies a non-domain design consideration
+    - Influences some structural aspect of the design
+    - Is critical or important to application success<br><br>
+
+2. *What is the difference between an implicit characteristic and an explicit one?
+Provide an example of each.*  
+Implicit ones rarely appear in requirements, yet they’re necessary
+for project success. For example, availability, reliability, and security underpin virtually all applications, 
+yet they’re rarely specified in design documents. Explicit architecture characteristics appear in requirements
+documents or other specific instructions.<br><br>
+
+3. *Provide an example of an operational characteristic.* 
+Availability, Continuity, Performance, Recoverability, Reliability/safety, Robustness, Scalability<br><br>
+
+4. *Provide an example of a structural characteristic.*  
+Configurability, Extensibility, Installability, Leverageability/reuse, Localization, Maintainability, Portability,
+Supportability, Upgradeability<br><br>
+
+5. *Provide an example of a cross-cutting characteristic.*
+Accessibility, Archivability, Authentication (ensure users are who they say they are), 
+Authorization (ensure users can access only certain functions withing the application), Legal, Privacy, Security,
+Supportability, Usability/achievability<br><br>
+
+6. *Which architecture characteristic is more important to strive for — availability or
+performance?*  
+It depends ;) "never shoot for the best architecture, but rather *the least worst* architecture"<br><br>
 
 ### Chapter 5: Identifying Architecture Characteristics
-1. Give a reason why it is a good practice to limit the number of characteristics (“-
-ilities”) an architecture should support.
-2. True or false: most architecture characteristics come from business requirements
-and user stories.
-3. If a business stakeholder states that time-to-market (i.e., getting new features and
+1. *Give a reason why it is a good practice to limit the number of characteristics 
+(“-ilities”) an architecture should support.*  
+Each architecture characteristic the architecture support complicates the overall system design; supporting too many
+leads to greater complexity before even starting to address the problem domain (the original problem motivation
+for writing the software in the first place).<br><br>
+
+2. *True or false: most architecture characteristics come from business requirements
+and user stories.*  
+Most architecture characteristics come from listening to key domain stakeholders and collaborating with them
+to determine what is important from a domain perspective. While this may seem like a straightforward activity,
+the problem is that architects and domain stakeholders speak different languages.<br><br>
+
+3. *If a business stakeholder states that time-to-market (i.e., getting new features and
 bug fixes pushed out to users as fast as possible) is the most important business
-concern, which architecture characteristics would the architecture need to sup‐
-port?
-4. What is the difference between scalability and elasticity?
-5. You find out that your company is about to undergo several major acquisitions to
+concern, which architecture characteristics would the architecture need to support?*  
+Agility, testability, deployability.<br><br>
+
+4. *What is the difference between scalability and elasticity?*  
+Scalability is the ability to handle a large number of concurrent users without serious performance degradation,
+while elasticity is the ability to handle bursts of requests.<br><br>
+
+5. *You find out that your company is about to undergo several major acquisitions to
 significantly increase its customer base. Which architectural characteristics
-should you be worried about?
+should you be worried about?*  
+Interoperability, scalability, adaptability, extensibility.<br><br>
 
 ### Chapter 6: Measuring and Governing Architecture Characteristics
-1. Why is cyclomatic complexity such an important metric to analyze for architec‐
-ture?
+1. Why is cyclomatic complexity such an important metric to analyze for architecture?
 2. What is an architecture fitness function? How can they be used to analyze an
 architecture?
 3. Provide an example of an architecture fitness function to measure the scalability
@@ -130,7 +184,7 @@ customer-facing quantum share a database? If so, in which quantum would the
 database need to reside?
 
 ### Chapter 8: Component-Based Thinking
-1. We define the term component as a building block of an application—something
+1. We define the term component as a building block of an application — something
 the application does. A component usually consist of a group of classes or source
 files. How are components typically manifested within an application or service?
 2. What is the difference between technical partitioning and domain partitioning?
@@ -140,6 +194,5 @@ Provide an example of each.
 domain partitioning?
 5. What is the entity trap? Why is it not a good approach for component
 identification?
-
 6. When might you choose the workflow approach over the Actor/Actions
 approach when identifying core components?
