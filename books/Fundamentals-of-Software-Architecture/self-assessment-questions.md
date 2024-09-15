@@ -25,6 +25,7 @@ Architect should:
 Alternatively, it can be said that "If an architect thinks they have discovered something that isn’t a trade-off, more likely
 they just haven’t identified the trade-off yet".<br><br>
 
+
 ### Chapter 2: Architectural Thinking
 1. *Describe the traditional approach of architecture versus development and
 explain why that approach no longer works.*  
@@ -75,6 +76,7 @@ There are several ways:
     - (cool idea would be to have hackathons where roles are switched, e.g. architects and QAs code while
       developers architect and test)
 
+
 ### Chapter 3: Modularity
 1. *What is meant by the term connascence?*  
 "Two components are connascent if a change in one would require the other to be
@@ -106,6 +108,7 @@ system-wide name changes trivial.<br><br>
 Static connascence is strongly preferred, as it is much easier to analyze call graph over  runtime calls.
 Maybe with better tooling and observability this wouldn't be as much of an issue.
 
+
 ### Chapter 4: Architecture Characteristics Defined
 1. *What three criteria must an attribute meet to be considered an architecture characteristic?*  
     - Specifies a non-domain design consideration
@@ -119,21 +122,21 @@ for project success. For example, availability, reliability, and security underp
 yet they’re rarely specified in design documents. Explicit architecture characteristics appear in requirements
 documents or other specific instructions.<br><br>
 
-3. *Provide an example of an operational characteristic.* 
-Availability, Continuity, Performance, Recoverability, Reliability/safety, Robustness, Scalability<br><br>
+3. *Provide an example of an operational characteristic.*  
+Availability, Continuity, Performance, Recoverability, Reliability/safety, Robustness, Scalability.<br><br>
 
 4. *Provide an example of a structural characteristic.*  
 Configurability, Extensibility, Installability, Leverageability/reuse, Localization, Maintainability, Portability,
 Supportability, Upgradeability<br><br>
 
-5. *Provide an example of a cross-cutting characteristic.*
+5. *Provide an example of a cross-cutting characteristic.*  
 Accessibility, Archivability, Authentication (ensure users are who they say they are), 
 Authorization (ensure users can access only certain functions withing the application), Legal, Privacy, Security,
 Supportability, Usability/achievability<br><br>
 
-6. *Which architecture characteristic is more important to strive for — availability or
-performance?*  
+6. *Which architecture characteristic is more important to strive for — availability or performance?*  
 It depends ;) "never shoot for the best architecture, but rather *the least worst* architecture"<br><br>
+
 
 ### Chapter 5: Identifying Architecture Characteristics
 1. *Give a reason why it is a good practice to limit the number of characteristics 
@@ -142,8 +145,7 @@ Each architecture characteristic the architecture support complicates the overal
 leads to greater complexity before even starting to address the problem domain (the original problem motivation
 for writing the software in the first place).<br><br>
 
-2. *True or false: most architecture characteristics come from business requirements
-and user stories.*  
+2. *True or false: most architecture characteristics come from business requirements and user stories.*  
 Most architecture characteristics come from listening to key domain stakeholders and collaborating with them
 to determine what is important from a domain perspective. While this may seem like a straightforward activity,
 the problem is that architects and domain stakeholders speak different languages.<br><br>
@@ -162,37 +164,84 @@ significantly increase its customer base. Which architectural characteristics
 should you be worried about?*  
 Interoperability, scalability, adaptability, extensibility.<br><br>
 
+
 ### Chapter 6: Measuring and Governing Architecture Characteristics
-1. Why is cyclomatic complexity such an important metric to analyze for architecture?
-2. What is an architecture fitness function? How can they be used to analyze an
-architecture?
-3. Provide an example of an architecture fitness function to measure the scalability
-of an architecture.
-4. What is the most important criteria for an architecture characteristic to allow
-architects and developers to create fitness functions?
+1. *Why is cyclomatic complexity such an important metric to analyze for architecture?*
+Architects and developers universally agree that overly complex code represents a code smell;
+it harms virtually every one of the desirable characteristics of code bases: modularity, testability and so on.<br><br>
+
+2. *What is an architecture fitness function? How can they be used to analyze an
+architecture?*  
+Any mechanism that provides an objective integrity assessment of some architecture characteristic 
+or combination of architecture characteristics.<br><br>
+
+3. *Provide an example of an architecture fitness function to measure the scalability
+of an architecture.*  
+(One possible fitness function would be a change of a performance metric (such as requests per second or throughput)
+under load in comparison to baseline value divided by change of resources assigned.
+Perfectly scalable system would get a value of 1.)<br><br>
+
+4. *What is the most important criteria for an architecture characteristic to allow
+architects and developers to create fitness functions?*  
+Measurability, it needs to be possible to objectively measure.<br><br>
+
 
 ### Chapter 7: Scope of Architecture Characteristics
-1. What is an architectural quantum, and why is it important to architecture?
-2. Assume a system consisting of a single user interface with four independently
+1. *What is an architectural quantum, and why is it important to architecture?*  
+An independently deployable artifact with high functional cohesion and synchronous connascence,
+i.e. part of the system (consisting of services, databases etc.) that can be deployed and removed on its own,
+doing something purposeful (like a business capability or a workflow) synchronously coupled within this subsystem.<br><br> 
+
+2. *Assume a system consisting of a single user interface with four independently
 deployed services, each containing its own separate database. Would this system
-have a single quantum or four quanta? Why?
-3. Assume a system with an administration portion managing static reference data
-(such as the product catalog, and warehouse information) and a customer-facing
-portion managing the placement of orders. How many quanta should this system
-be and why? If you envision multiple quanta, could the admin quantum and
-customer-facing quantum share a database? If so, in which quantum would the
-database need to reside?
+have a single quantum or four quanta? Why?*  
+Assuming that services are correctly split and each of them encompasses a separate bounded context,
+system would have four quanta, due to deployment independence and separation.<br><br> 
+
+3. *Assume a system with an administration portion managing static reference data
+(such as the product catalog, and warehouse information) and a customer-facing portion managing the placement of orders. 
+How many quanta should this system be and why?
+If you envision multiple quanta, could the admin quantum and customer-facing quantum share a database?
+If so, in which quantum would the database need to reside?*  
+Preferred solution would be to have 2 quantas, as architecture characterics such as scalability and elasticity are
+vastly higher for customer-facing portion than for administration side. Also static data might need to be optimized
+for fast reads and searchability.  
+However, if cost management is important characteristic then I would suggest having database in quantum with higher
+requirements and performing separate update procedures from the second quantum.<br><br>
+
 
 ### Chapter 8: Component-Based Thinking
-1. We define the term component as a building block of an application — something
-the application does. A component usually consist of a group of classes or source
-files. How are components typically manifested within an application or service?
-2. What is the difference between technical partitioning and domain partitioning?
-Provide an example of each.
-3. What is the advantage of domain partitioning?
-4. Under what circumstances would technical partitioning be a better choice over
-domain partitioning?
-5. What is the entity trap? Why is it not a good approach for component
-identification?
-6. When might you choose the workflow approach over the Actor/Actions
-approach when identifying core components?
+1. *We define the term component as a building block of an application — something the application does.
+A component usually consist of a group of classes or source files.
+How are components typically manifested within an application or service?*  
+Simplest form of component is a library, which just wraps code at higher level of modularity then classes or objects.
+Components also appear as subsystems, layers or services.<br><br>
+
+2. *What is the difference between technical partitioning and domain partitioning?
+Provide an example of each.*  
+Technical partitioning means that on the top-level, functionality of the system is devided into technical capabilities:
+presentation, business rules, services, persistence and so on (example is Model-View-Controller and variants).
+In domain partitioning top-level division is around domains or workflows, for example e-commerce application
+could be divided into CatalogCheckout, UpdateInventory, ShipToCustomer, Reporting, Analytics, UpdateAccounts.<br><br>
+
+3. *What is the advantage of domain partitioning?*  
+Each of the workflows is encapsulated within a single top-level component,
+which better reflects the kinds of changes that most often occur in the projects.<br><br>
+
+4. *Under what circumstances would technical partitioning be a better choice over domain partitioning?*  
+It offers clear separation of technical concerns, which in turn creates useful levels of decoupling: change in one layer
+might only affect neighbouring layers. This style of partitioning provides a decoupling technique, reducing rippling
+side effects on dependent components. It also enables developers to find certain categories of the code 
+in the code base quickly, as it is organized by capabilities, which is better where we have separate departments 
+like Database Administration, Backend Development, Presentation etc.<br><br>
+
+5. *What is the entity trap? Why is it not a good approach for component identification?*  
+Is it as anti-pattern where components are structured around entities, while in real world database relationships
+are typically a different thing than actual workflows in the application.  
+Components created with the entity trap also tend to be too coarse-grained, offering no guidance whatsover
+to the development team in terms of the packaging and overall structuring of the source code.<br><br>
+
+6. *When might you choose the workflow approach over the Actor/Actions approach when identifying core components?*  
+Actor/Actions approach fits well more traditional software development processes with significant upfront design,
+where requirements feature distinct roles and the kinds of actions they can perform. Workflow approach suits better
+teams using Agile software development.<br><br>
