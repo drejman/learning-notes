@@ -1,3 +1,5 @@
+## Part 1: Foundations
+
 ### Chapter 1: Introduction
 1. *What are the four dimensions that define software architecture?*  
 Software architecture consists of the structure of the system (foundations supporting the architecture), 
@@ -245,3 +247,104 @@ to the development team in terms of the packaging and overall structuring of the
 Actor/Actions approach fits well more traditional software development processes with significant upfront design,
 where requirements feature distinct roles and the kinds of actions they can perform. Workflow approach suits better
 teams using Agile software development.<br><br>
+
+
+## Part 2: Architecture Styles
+
+### Chapter 9: Architecture Styles
+1. *List the eight fallacies of distributed computing.*  
+2. *Name three challenges that distributed architectures have that monolithic architectures don’t.*  
+3. *What is stamp coupling?*  
+4. *What are some ways of addressing stamp coupling?*  
+
+### Chapter 10: Layered Architecture Style
+1. *What is the difference between an open layer and a closed layer?*  
+2. *Describe the layers of isolation concept and what the benefits are of this concept.*  
+3. *What is the architecture sinkhole anti-pattern?*  
+4. *What are some of the main architecture characteristics that would drive you to use a layered architecture?*  
+5. *Why isn’t testability well supported in the layered architecture style?*  
+6. *Why isn’t agility well supported in the layered architecture style?*  
+
+### Chapter 11: Pipeline Architecture
+1. *Can pipes be bidirectional in a pipeline architecture?*  
+2. *Name the four types of filters and their purpose.*  
+3. *Can a filter send data out through multiple pipes?*  
+4. *Is the pipeline architecture style technically partitioned or domain partitioned?*  
+5. *In what way does the pipeline architecture support modularity?*  
+6. *Provide two examples of the pipeline architecture style.*  
+
+### Chapter 12: Microkernel Architecture
+1. *What is another name for the microkernel architecture style?*  
+2. *Under what situations is it OK for plug-in components to be dependent on other plug-in components?*  
+3. *What are some of the tools and frameworks that can be used to manage plug-ins?*  
+4. *What would you do if you had a third-party plug-in that didn’t conform to the
+standard plug-in contract in the core system?*  
+5. *Provide two examples of the microkernel architecture style.*  
+6. *Is the microkernel architecture style technically partitioned or domain partitioned?*  
+7. *Why is the microkernel architecture always a single architecture quantum?*  
+8. *What is domain/architecture isomorphism?*  
+
+### Chapter 13: Service-Based Architecture
+1. *How many services are there in a typical service-based architecture?*  
+2. *Do you have to break apart a database in service-based architecture?*  
+3. *Under what circumstances might you want to break apart a database?*  
+4. *What technique can you use to manage database changes within a service-based architecture?*  
+5. *Do domain services require a container (such as Docker) to run?*  
+6. *Which architecture characteristics are well supported by the service-based architecture style?*  
+7. *Why isn’t elasticity well supported in a service-based architecture?*  
+8. *How can you increase the number of architecture quanta in a service-based architecture?*  
+
+### Chapter 14: Event-Driven Architecture Style
+1. *What are the primary differences between the broker and mediator topologies?*  
+2. *For better workflow control, would you use the mediator or broker topology?*  
+3. *Does the broker topology usually leverage a publish-and-subscribe model with topics
+or a point-to-point model with queues?*  
+4. *Name two primary advantage of asynchronous communications.*  
+5. *Give an example of a typical request within the request-based model.*  
+6. *Give an example of a typical request in an event-based model.*  
+7. *What is the difference between an initiating event and a processing event in event-driven architecture?*  
+8. *What are some of the techniques for preventing data loss when sending and receiving messages from a queue?*  
+9. *What are three main driving architecture characteristics for using event-driven architecture?*  
+10. *What are some of the architecture characteristics that are not well supported in event-driven architecture?*  
+
+### Chapter 15: Space-Based Architecture
+1. *Where does space-based architecture get its name from?*  
+2. *What is a primary aspect of space-based architecture that differentiates it from other architecture styles?*  
+3. *Name the four components that make up the virtualized middleware within a space-based architecture.*  
+4. *What is the role of the messaging grid?*  
+5. *What is the role of a data writer in space-based architecture?*  
+6. *Under what conditions would a service need to access data through the data reader?*  
+7. *Does a small cache size increase or decrease the chances for a data collision?*  
+8. *What is the difference between a replicated cache and a distributed cache? 
+Which one is typically used in space-based architecture?*  
+9. *List three of the most strongly supported architecture characteristics in spacebased architecture.*  
+10. *Why does testability rate so low for space-based architecture?*  
+
+### Chapter 16: Orchestration-Driven Service-Oriented Architecture
+1. *What was the main driving force behind service-oriented architecture?*  
+2. *What are the four primary service types within a service-oriented architecture?*  
+3. *List some of the factors that led to the downfall of service-oriented architecture.*  
+4. *Is service-oriented architecture technically partitioned or domain partitioned?*  
+5. *How is domain reuse addressed in SOA? How is operational reuse addressed?*  
+
+### Chapter 17: Microservices Architecture
+1. *Why is the bounded context concept so critical for microservices architecture?*  
+2. *What are three ways of determining if you have the right level of granularity in a microservice?*  
+3. *What functionality might be contained within a sidecar?*  
+4. *What is the difference between orchestration and choreography? Which does microservices support?
+Is one communication style easier in microservices?*  
+5. *What is a saga in microservices?*  
+6. *Why are agility, testability, and deployability so well supported in microservices?*  
+7. *What are two reasons performance is usually an issue in microservices?*  
+8. *Is microservices a domain-partitioned architecture or a technically partitioned one?*  
+9. *Describe a topology where a microservices ecosystem might be only a single quantum.*  
+10. *How was domain reuse addressed in microservices? How was operational reuse addressed?*  
+
+### Chapter 18: Choosing the Appropriate Architecture Style
+1. *In what way does the data architecture (structure of the logical and physical data models) 
+influence the choice of architecture style?*  
+2. *How does it influence your choice of architecture style to use?*  
+3. *Delineate the steps an architect uses to determine style of architecture, data partitioning,
+and communication styles.*  
+4. *What factor leads an architect toward a distributed architecture?*  
+
