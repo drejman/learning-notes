@@ -253,17 +253,77 @@ teams using Agile software development.<br><br>
 
 ### Chapter 9: Architecture Styles
 1. *List the eight fallacies of distributed computing.*  
+   1. The network is reliable
+   2. Latency is zero
+   3. Bandwidth is infinite
+   4. The network is secure
+   5. Topology doesn't change
+   6. There is one administrator
+   7. Transport cost is zero
+   8. The network is homogeneous<br><br>
+   
 2. *Name three challenges that distributed architectures have that monolithic architectures don’t.*  
+Distributed logging, distributed transactions, contract maintenance and versioning.<br><br>
+
 3. *What is stamp coupling?*  
-4. *What are some ways of addressing stamp coupling?*  
+Stamp coupling occurs when modules or components are passing whole data structure 
+instead of just the actual data that caller needs.<br><br>
+
+4. *What are some ways of addressing stamp coupling?*
+    - Create private (more granular) RESTful API endpoints
+    - Use field selectors in the contract
+    - Use GraphQL to decouple contracts
+    - Use value-driven contracts with consumer-driver contracts (CDCs)
+    - Use internal messaging endpoints
+   
 
 ### Chapter 10: Layered Architecture Style
+<details>
+<summary>Scorecard</summary>
+<img src="layered_architecture_scorecard.png" style="width: 50%"/>
+</details>
+
 1. *What is the difference between an open layer and a closed layer?*  
+Each layer in the layered architecture style can be either closed or open.
+A closed layer means that as a request moves top-down from layer to layer,
+the request cannot skip any layers, but rather must go through the layer immediately below it to get to the next layer. 
+At the other hand, open layer allows requests to bypass itself and call directly the layer below it.<br><br>
+
 2. *Describe the layers of isolation concept and what the benefits are of this concept.*  
+The layers of isolation concept means that changes made in one layer of the architecture generally don’t impact
+or affect components in other layers, providing the contracts between those layers remain unchanged. (loose coupling) 
+Each layer is independent of the other layers, thereby having little or no knowledge of the inner workings 
+of other layers in the architecture. However, to support layers of isolation, 
+layers involved with the major flow of the request necessarily have to be closed.  
+The layers of isolation concept also allows any layer in the architecture to be replaced
+without impacting any other layer (again, assuming well-defined contracts and the use of the business delegate pattern).
+<br><br>
+
 3. *What is the architecture sinkhole anti-pattern?*  
+This anti-pattern occurs when requests move from layer to layer as simple pass-through processing 
+with no business logic performed within each layer. This results in unnecessary object instantiation and processing, 
+impacting both memory consumption and performance.  
+Every layered architecture will have at least some scenarios that fall into this case.
+The key to determining whether the architecture sinkhole anti-pattern is at play is to analyze 
+the percentage of requests that fall into this category. If 80% of the requests are sinkholes, 
+it a good indicator that the layered architecture is not the correct architecture style for the problem domain.<br><br>
+
 4. *What are some of the main architecture characteristics that would drive you to use a layered architecture?*  
-5. *Why isn’t testability well supported in the layered architecture style?*  
-6. *Why isn’t agility well supported in the layered architecture style?*  
+Low overall cost and simplicity.  
+Being monolithic in nature, layered architectures don’t have the complexities associated with distributed architectures, 
+are simple and easy to understand, and are relatively low cost to build and maintain. 
+However, these ratings start to quickly diminish as monolithic layered architectures get bigger and more complex.<br><br>
+
+5. *Why isn’t testability well-supported in the layered architecture style?*  
+As monoliths are single deployment units, even the smallest changes requires redeploying, and therefore testing,
+of the entire unit. Typically, a lot of changes are being introduced to production at the same time,
+which makes it harder to investigate and debug. This is partially eased by ability to mock or stub components,
+or even entire layers.<br><br>
+
+6. *Why isn’t agility well-supported in the layered architecture style?*  
+Agility, i.e. ability to respond quickly to change, is not supported well because any particular business domain is
+spread throughout all of the layers of the architecture, making it difficult to apply changes to that domain.<br><br>
+
 
 ### Chapter 11: Pipeline Architecture
 1. *Can pipes be bidirectional in a pipeline architecture?*  
