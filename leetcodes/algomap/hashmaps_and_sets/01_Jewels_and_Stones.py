@@ -34,7 +34,12 @@ class Solution:
             space: O(m)
         """
         count = 0
-        jewels = set(jewels)  # for short string searching in string might be faster, also maybe sort string and bisect?
+        # for short string searching in string might be faster
+        # for stone in stones:
+        #     if jewels.find(stone) != -1:
+        #         count += 1
+
+        jewels = set(jewels)
         for stone in stones:
             if stone in jewels:
                 count += 1
