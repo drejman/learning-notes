@@ -326,33 +326,148 @@ spread throughout all of the layers of the architecture, making it difficult to 
 
 
 ### Chapter 11: Pipeline Architecture
+<details>
+<summary>Scorecard</summary>
+<img src="pipeline_architecture_scorecard.png" style="width: 50%"/>
+</details>
+
 1. *Can pipes be bidirectional in a pipeline architecture?*  
-2. *Name the four types of filters and their purpose.*  
+Typically pipes are unidirectional, forming one-way communication between filters, 
+usually in a point-to-point fashion.<br><br>
+
+2. *Name the four types of filters and their purpose.*
+- Producer (sometimes called the source): the starting point of a process, outbound only
+- Transformer: accepts input, optionally performs a transformation on some or all of the data,
+then forwards it to the outbound pipe (analogous to *map*)
+- Tester: accepts input, tests one or more criteria, then optionally produces output, based on the result of the test
+  (analogous to *reduce*)
+- Consumer: the termination point for the pipeline flow; it may persist the final result to a database, 
+  serialize to file or display on a user interface
 3. *Can a filter send data out through multiple pipes?*  
-4. *Is the pipeline architecture style technically partitioned or domain partitioned?*  
+Yes.<br><br>
+
+4. *Is the pipeline architecture style technically partitioned or domain partitioned?*
+Technically partitioned architecture due to the partitioning of application logic into filter types 
+(producer, tester, transformer, and consumer).<br><br>
+
 5. *In what way does the pipeline architecture support modularity?*  
+Architectural modularity is achieved through the separation of concerns between the various filter types 
+and transformers. Any of these filters can be modified or replaced without impacting the other filters.<br><br>
+
 6. *Provide two examples of the pipeline architecture style.*  
+ETL tools (extract, transform, and load) leverage the pipeline architecture as well for the flow 
+and modification of data from one database or data source to another.  
+Orchestrators and mediators such as Apache Camel utilize the pipeline architecture to pass information 
+from one step in a business process to another.<br><br>
+
 
 ### Chapter 12: Microkernel Architecture
+<details>
+<summary>Scorecard</summary>
+<img src="microkernel_architecture_scorecard.png" style="width: 50%"/>
+</details>
+
 1. *What is another name for the microkernel architecture style?*  
-2. *Under what situations is it OK for plug-in components to be dependent on other plug-in components?*  
+*Plug-in* architecture.<br><br>
+
+2. *Under what situations is it OK for plug-in components to be dependent on other plug-in components?*
+Ideally, plug-in components should be independent of each other and have no dependencies between them.<br><br>
+
 3. *What are some of the tools and frameworks that can be used to manage plug-ins?*  
+Runtime plug-in components can be added or removed at runtime without having to redeploy the core system 
+or other plug-ins, and they are usually managed through frameworks such as Open Service Gateway Initiative (OSGi) 
+for Java, Penrose (Java), Jigsaw (Java), or Prism (.NET).<br><br>
+
 4. *What would you do if you had a third-party plug-in that didn’t conform to the
 standard plug-in contract in the core system?*  
+You can create an adapter between plug-in contract and standard contract, so that core system does not need to be 
+specialized in any way.<br><br>
+
 5. *Provide two examples of the microkernel architecture style.*  
+A product or application that places a strong emphasis on user customization and feature extensibility 
+(such as Jira or an IDE like Eclipse). Another example of a large and complex business application
+is tax preparation software.<br><br>
+
 6. *Is the microkernel architecture style technically partitioned or domain partitioned?*  
+\+
+9. *What is domain/architecture isomorphism?*  
+While most microkernel architectures are technically partitioned, the domain partitioning aspect comes about mostly 
+through a strong domain-to-architecture isomorphism. For example, problems that require different configurations 
+for each location or client match extremely well with this architecture style.<br><br>
+
 7. *Why is the microkernel architecture always a single architecture quantum?*  
-8. *What is domain/architecture isomorphism?*  
+The number of quanta is always singular (one) because all requests must go through the core system
+to get to independent plug-in components.<br><br>
+
 
 ### Chapter 13: Service-Based Architecture
+<details>
+<summary>Scorecard</summary>
+<img src="service-based_architecture_scorecard.png" style="width: 50%"/>
+</details>
+
 1. *How many services are there in a typical service-based architecture?*  
+Because the services typically share a single monolithic database, the number of services within 
+an application context generally range between 4 and 12 services, with the average being about 7 services.<br><br>
+
 2. *Do you have to break apart a database in service-based architecture?*  
+No, usually services share a single, monolithic database. This database coupling can present an issue with respect to
+database table schema changes. If not done properly, a table schema change can potentially impact every service, 
+making database changes a very costly task in terms of effort and coordination.<br><br>
+
 3. *Under what circumstances might you want to break apart a database?*  
+Opportunities may exist to break apart a single monolithic database into separate databases, 
+even going as far as domain-scoped databases matching each domain service (similar to microservices). 
+In these cases it is important to make sure the data in each separate database is not needed by another domain service. 
+This avoids interservice communication between domain services (something to definitely avoid with 
+service-based architecture) and also the duplication of data between databases.<br><br>
+
 4. *What technique can you use to manage database changes within a service-based architecture?*  
+The practice of creating a single shared library of entity objects is the least effective way of implementing 
+service-based architecture. Any change to the database table structures would also require a change to the single
+shared library containing all of the corresponding entity objects, thus requiring a change and redeployment 
+to every service, regardless of whether or not the services actually access the changed table.
+One way to mitigate the impact and risk of database changes is to logically partition the database 
+and manifest the logical partitioning through federated shared libraries. Using this technique, changes to a table 
+within a particular logical domain match the corresponding shared library containing the entity objects 
+(and possibly SQL as well), impacting only those services using that shared library. 
+No other services are impacted by this change.  
+Tip: Make the logical partitioning in the database as fine-grained as possible while still maintaining 
+well-defined data domains to better control database changes within a service-based architecture.<br><br>
+
 5. *Do domain services require a container (such as Docker) to run?*  
-6. *Which architecture characteristics are well supported by the service-based architecture style?*  
-7. *Why isn’t elasticity well supported in a service-based architecture?*  
+No, services within this architecture style are typically coarse-grained “portions of an application” 
+(usually called domain services) that are independent and separately deployed. Services are typically deployed 
+in the same manner as any monolithic application would be (such as an EAR file, WAR file, or assembly) 
+and as such do not require containerization (although you could deploy a domain service in a container
+such as Docker).<br><br>
+
+6. *Which architecture characteristics are well-supported by the service-based architecture style?*  
+Breaking apart an application into separately deployed domain services using this architecture style allows
+for faster change (agility), better test coverage due to the limited scope of the domain (testability), 
+and the ability for more frequent deployments carrying less risk than a large monolith (deployability). 
+These three characteristics lead to better time-to-market, allowing an organization to deliver new features 
+and bug fixes at a relatively high rate.  
+Fault tolerance and overall application availability also rate high for service-based architecture.
+It also tends to be more reliable than other distributed architectures due to the coarse-grained nature 
+of the domain services.  
+Simplicity and overall cost are two other drivers that differentiate this architecture style from other, 
+more expensive and complex distributed architectures, such as microservices, event-driven architecture, 
+or even space-based architecture. This makes service-based one of the easiest and cost-effective 
+distributed architectures to implement.<br><br>
+
+7. *Why isn’t elasticity well-supported in a service-based architecture?*  
+Although programmatic scalability and elasticity are certainly possible with this architecture style, 
+more functionality is replicated than with finer-grained services (such as microservices) and as such is not as
+efficient in terms of machine resources and not as cost-effective. Typically, there are only single service instances 
+with service-based architecture unless there is a need for better throughput or failover.<br><br>
+
 8. *How can you increase the number of architecture quanta in a service-based architecture?*  
+Being a distributed architecture, the number of quanta can be greater than or equal to one. 
+Even though there may be anywhere from 4 to 12 separately deployed services, if those services all share 
+the same database or user interface, that entire system would be only a single quantum. However, 
+both the user interface and database can be federated, resulting in multiple quanta within the overall system.<br><br>
+
 
 ### Chapter 14: Event-Driven Architecture Style
 1. *What are the primary differences between the broker and mediator topologies?*  
