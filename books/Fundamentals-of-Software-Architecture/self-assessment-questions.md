@@ -470,50 +470,192 @@ both the user interface and database can be federated, resulting in multiple qua
 
 
 ### Chapter 14: Event-Driven Architecture Style
+<details>
+<summary>Scorecard</summary>
+<img src="event-driven_architecture_scorecard.png" style="width: 50%"/>
+</details>
+
 1. *What are the primary differences between the broker and mediator topologies?*  
+In mediator topology there is a central event mediator, which provides control over the workflow of an event process, 
+whereas the broker topology does not have any central component and rather uses the distributed message flow,
+which can result in high degree of responsiveness and dynamic control over the processing of an event.<br><br>
+
 2. *For better workflow control, would you use the mediator or broker topology?*  
+Mediator topology.<br><br>
+
 3. *Does the broker topology usually leverage a publish-and-subscribe model with topics
-or a point-to-point model with queues?*  
+or a point-to-point model with queues?*
+Pub-sub with topics.<br><br>
+
 4. *Name two primary advantage of asynchronous communications.*  
+   - improved scalability and responsiveness
+   - increased fault tolerance and resilience
+   <br><br>
+
 5. *Give an example of a typical request within the request-based model.*  
+Requests are published as *commands*, such as place-order, send-email and fulfill-order.<br><br>
+
 6. *Give an example of a typical request in an event-based model.*  
+Requests are published as *events* that had already occurred in the system (such as order-created, 
+payment-applied and email-sent)<br><br>
+
 7. *What is the difference between an initiating event and a processing event in event-driven architecture?*  
-8. *What are some of the techniques for preventing data loss when sending and receiving messages from a queue?*  
-9. *What are three main driving architecture characteristics for using event-driven architecture?*  
-10. *What are some of the architecture characteristics that are not well supported in event-driven architecture?*  
+Initiating events starts the process, while processing event marks that one of the steps has been done.<br><br>
+
+8. *What are some of the techniques for preventing data loss when sending and receiving messages from a queue?*
+   - persistent message queues
+   - synchronous send
+   - client acknowledge mode
+   - last participant support
+   <br><br>
+
+9. *What are three main driving architecture characteristics for using event-driven architecture?*   
+Evolutionary, fault tolerance and scalability.<br><br>
+
+10. *What are some of the architecture characteristics that are not well-supported in event-driven architecture?*  
+Overall simplicity and testability rate relatively low with event-driven architecture,
+mostly due to the nondeterministic and dynamic event flows typically found within this architecture style.<br><br>
 
 ### Chapter 15: Space-Based Architecture
+<details>
+<summary>Scorecard</summary>
+<img src="space-based_architecture_scorecard.png" style="width: 50%"/>
+</details>
+
 1. *Where does space-based architecture get its name from?*  
+Space-based architecture gets its name from the concept of *tuple space*, the technique
+of using multiple parallel processors communicating through shared memory.<br><br>
+
 2. *What is a primary aspect of space-based architecture that differentiates it from other architecture styles?*  
+Application data is kept in-memory and replicated among all the active processing units. 
+When a processing unit updates data, it asynchronously sends that data to the database, 
+usually via messaging with persistent queues.<br><br>
+
 3. *Name the four components that make up the virtualized middleware within a space-based architecture.*  
+   - Messaging Grid
+   - Data Grid
+   - Processing Grid
+   - Deployment Manager
+   <br><br>
+
 4. *What is the role of the messaging grid?*  
+The messaging grid, manages input request and session state. When a request comes into the virtualized middleware, 
+the messaging grid component determines which active processing components are available to receive the request 
+and forwards the request to one of those processing units.<br><br>
+
 5. *What is the role of a data writer in space-based architecture?*  
+The data writer component accepts messages from a data pump and updates the database with the information contained 
+in the message of the data pump.<br><br>
+
 6. *Under what conditions would a service need to access data through the data reader?*  
+In space-based architecture, data readers
+are only invoked under one of three situations: a crash of all processing unit instances
+of the same named cache, a redeployment of all processing units within the same
+named cache, or retrieving archive data not contained in the replicated cache.<br><br>
+
 7. *Does a small cache size increase or decrease the chances for a data collision?*  
+Increase.<br><br>
+
 8. *What is the difference between a replicated cache and a distributed cache? 
 Which one is typically used in space-based architecture?*  
+Space-based architecture mostly relies on replicated caching, although distributed caching can be used as well.
+Replicated caching works in internal memory, while distributed caching requires an external serves or service dedicated
+to holding a centralized cache.<br><br>
+
 9. *List three of the most strongly supported architecture characteristics in spacebased architecture.*  
+Elasticity, scalability and performance.  
+These are the driving attributes and main advantages of this architecture style. 
+High levels of all three of these architecture characteristics are achieved by leveraging in-memory data caching 
+and removing the database as a constraint. As a result, processing millions of concurrent users is possible using this
+architecture style.<br><br>
+
 10. *Why does testability rate so low for space-based architecture?*  
+Due to the complexity involved with simulating the high levels of scalability and elasticity supported in this 
+architecture style. Testing hundreds of thousands of concurrent users at peak load is a very complicated and expensive 
+task, and as a result most high-volume testing occurs within production environments with actual extreme load. 
+This produces significant risk for normal operations within a production environment.<br><br>
 
 ### Chapter 16: Orchestration-Driven Service-Oriented Architecture
+<details>
+<summary>Scorecard</summary>
+<img src="orchestration-driven_service-oriented_architecture_scorecard.png" style="width: 50%"/>
+</details>
+
 1. *What was the main driving force behind service-oriented architecture?*  
+Reuse. Reuse of everything.<br><br>
+
 2. *What are the four primary service types within a service-oriented architecture?*  
+   - business services
+   - enterprise services
+   - application services
+   - infrastructure services
+
 3. *List some of the factors that led to the downfall of service-oriented architecture.*  
+System build primarily around reuse incurs a huge amount of coupling between components.
+Therefore, each change had a potential huge ripple effect. All the teams have to deal with extra complexity
+introduced due to having single model for diverse use cases. On the top of that, architecture so focused
+on technical partitioning results in spreading domain concepts extremely thinly throughout the system.<br><br>
+
 4. *Is service-oriented architecture technically partitioned or domain partitioned?*  
+Extremely technically.<br><br>
+
 5. *How is domain reuse addressed in SOA? How is operational reuse addressed?*  
+By creating shared business services and infrastructure services. If the teams needs matched, 
+then they could reuse existing service.
+
 
 ### Chapter 17: Microservices Architecture
+<details>
+<summary>Scorecard</summary>
+<img src="microservices_architecture_scorecard.png" style="width: 50%"/>
+</details>
+
 1. *Why is the bounded context concept so critical for microservices architecture?*  
+The primary goal of microservices is high decoupling, physically  modeling the logical notion of bounded context.
+Within a bounded context, the internal parts, such as code and data schemas, are coupled together to produce work; 
+but they are never coupled to anything outside the bounded context, such as a database or class definition 
+from another bounded context. This allows each context to define only what it needs 
+rather than accommodating other constituents.<br><br>
+
 2. *What are three ways of determining if you have the right level of granularity in a microservice?*  
+   - Purpose: each microservice should be extremely functionally cohesive, contributing to one behaviour of the application
+   - Transactions: distributed transactions cause a lot of issues, systems that avoid them tend to have better designs
+   - Choreography: if services have excellent domain isolation, yet require extensive communication to function,
+     they might be considered to be bundled together
+   <br><br>   
+
 3. *What functionality might be contained within a sidecar?*  
+Operational concerns such as monitoring, logging and circuit breakers.<br><br>
+
 4. *What is the difference between orchestration and choreography? Which does microservices support?
 Is one communication style easier in microservices?*  
+Choreography, due to not having central coordinator in this architecture, respecting the bounded context philosophy. 
+Thus, architects find it natural to implement decoupled events between services.<br><br>
+
 5. *What is a saga in microservices?*  
-6. *Why are agility, testability, and deployability so well supported in microservices?*  
+Saga is a distributed transactional pattern, where a service acts as a mediator between multiple service calls
+and coordinates a transaction. The mediator calls each part of the transaction, records success or failure, 
+and coordinates results. If everything goes as planned, all the values in the services 
+and their contained databases update synchronously. 
+In an error condition, the mediator must ensure that no part of the transaction succeeds if one part fails.<br><br>
+
+6. *Why are agility, testability, and deployability so well-supported in microservices?*  
+By building an architecture that has extremely small deployment units that are highly decoupled.<br><br>
+
 7. *What are two reasons performance is usually an issue in microservices?*  
+Performance is often an issue in microservices—distributed architectures must make many network calls to complete work, 
+which has high performance overhead, and they must invoke security checks to verify identity and access for each endpoint.
+<br><br>
+
 8. *Is microservices a domain-partitioned architecture or a technically partitioned one?*  
+Domain (if done right, if not we have a distributed monolith).
+
 9. *Describe a topology where a microservices ecosystem might be only a single quantum.*  
+If all microservices are communicating synchronously and all services are connected within business processes.
+
 10. *How was domain reuse addressed in microservices? How was operational reuse addressed?*  
+Domain reuse is discouraged between bounded concepts, as it introduces coupling.
+Operational reuse is addressed through using sidecar pattern or through using shared libraries.
 
 ### Chapter 18: Choosing the Appropriate Architecture Style
 1. *In what way does the data architecture (structure of the logical and physical data models) 
