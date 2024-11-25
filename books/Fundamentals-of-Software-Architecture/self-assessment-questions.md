@@ -280,7 +280,7 @@ instead of just the actual data that caller needs.<br><br>
 ### Chapter 10: Layered Architecture Style
 <details>
 <summary>Scorecard</summary>
-<img src="layered_architecture_scorecard.png" style="width: 50%"/>
+<img src="images/layered_architecture_scorecard.png" style="width: 50%"/>
 </details>
 
 1. *What is the difference between an open layer and a closed layer?*  
@@ -328,7 +328,7 @@ spread throughout all of the layers of the architecture, making it difficult to 
 ### Chapter 11: Pipeline Architecture
 <details>
 <summary>Scorecard</summary>
-<img src="pipeline_architecture_scorecard.png" style="width: 50%"/>
+<img src="images/pipeline_architecture_scorecard.png" style="width: 50%"/>
 </details>
 
 1. *Can pipes be bidirectional in a pipeline architecture?*  
@@ -336,13 +336,13 @@ Typically pipes are unidirectional, forming one-way communication between filter
 usually in a point-to-point fashion.<br><br>
 
 2. *Name the four types of filters and their purpose.*
-- Producer (sometimes called the source): the starting point of a process, outbound only
-- Transformer: accepts input, optionally performs a transformation on some or all of the data,
-then forwards it to the outbound pipe (analogous to *map*)
-- Tester: accepts input, tests one or more criteria, then optionally produces output, based on the result of the test
-  (analogous to *reduce*)
-- Consumer: the termination point for the pipeline flow; it may persist the final result to a database, 
-  serialize to file or display on a user interface
+   - Producer (sometimes called the source): the starting point of a process, outbound only
+   - Transformer: accepts input, optionally performs a transformation on some or all of the data,
+   then forwards it to the outbound pipe (analogous to *map*)
+   - Tester: accepts input, tests one or more criteria, then optionally produces output, based on the result of the test
+     (analogous to *reduce*)
+   - Consumer: the termination point for the pipeline flow; it may persist the final result to a database, 
+     serialize to file or display on a user interface
 3. *Can a filter send data out through multiple pipes?*  
 Yes.<br><br>
 
@@ -364,7 +364,7 @@ from one step in a business process to another.<br><br>
 ### Chapter 12: Microkernel Architecture
 <details>
 <summary>Scorecard</summary>
-<img src="microkernel_architecture_scorecard.png" style="width: 50%"/>
+<img src="images/microkernel_architecture_scorecard.png" style="width: 50%"/>
 </details>
 
 1. *What is another name for the microkernel architecture style?*  
@@ -403,7 +403,7 @@ to get to independent plug-in components.<br><br>
 ### Chapter 13: Service-Based Architecture
 <details>
 <summary>Scorecard</summary>
-<img src="service-based_architecture_scorecard.png" style="width: 50%"/>
+<img src="images/service-based_architecture_scorecard.png" style="width: 50%"/>
 </details>
 
 1. *How many services are there in a typical service-based architecture?*  
@@ -472,7 +472,7 @@ both the user interface and database can be federated, resulting in multiple qua
 ### Chapter 14: Event-Driven Architecture Style
 <details>
 <summary>Scorecard</summary>
-<img src="event-driven_architecture_scorecard.png" style="width: 50%"/>
+<img src="images/event-driven_architecture_scorecard.png" style="width: 50%"/>
 </details>
 
 1. *What are the primary differences between the broker and mediator topologies?*  
@@ -519,7 +519,7 @@ mostly due to the nondeterministic and dynamic event flows typically found withi
 ### Chapter 15: Space-Based Architecture
 <details>
 <summary>Scorecard</summary>
-<img src="space-based_architecture_scorecard.png" style="width: 50%"/>
+<img src="images/space-based_architecture_scorecard.png" style="width: 50%"/>
 </details>
 
 1. *Where does space-based architecture get its name from?*  
@@ -578,7 +578,7 @@ This produces significant risk for normal operations within a production environ
 ### Chapter 16: Orchestration-Driven Service-Oriented Architecture
 <details>
 <summary>Scorecard</summary>
-<img src="orchestration-driven_service-oriented_architecture_scorecard.png" style="width: 50%"/>
+<img src="images/orchestration-driven_service-oriented_architecture_scorecard.png" style="width: 50%"/>
 </details>
 
 1. *What was the main driving force behind service-oriented architecture?*  
@@ -607,7 +607,7 @@ then they could reuse existing service.
 ### Chapter 17: Microservices Architecture
 <details>
 <summary>Scorecard</summary>
-<img src="microservices_architecture_scorecard.png" style="width: 50%"/>
+<img src="images/microservices_architecture_scorecard.png" style="width: 50%"/>
 </details>
 
 1. *Why is the bounded context concept so critical for microservices architecture?*  
@@ -665,3 +665,63 @@ influence the choice of architecture style?*
 and communication styles.*  
 4. *What factor leads an architect toward a distributed architecture?*  
 
+### Chapter 19: Architecture Decisions
+1. *What is the covering your assets anti-pattern?*
+2. *What are some techniques for avoiding the email-driven architecture anti-pattern?*
+3. *What are the five factors Michael Nygard defines for identifying something as architecturally significant?*
+   - **Structure**: decisions that impact the pattern or styles of architecture being used.
+   - **Nonfunctional characteristics**: quality attributes ("-ilities") that are important for the application or system.
+   - **Dependencies**: coupling points between components and/or services within the system.
+   - **Interfaces**: how services and components are accessed and orchestrated, it involves defining contracts, versioning etc.
+   - **Construction techniques**: decisions about platforms, frameworks, tools and even processes.
+   <br><br>
+   
+4. *What are the five basic sections of an architecture decision record?*
+5. *In which section of an ADR do you typically add the justification for an architecture decision?*
+6. *Assuming you don’t need a separate Alternatives section, in which section of an ADR would you list
+the alternatives to your proposed solution?*
+7. *What are three basic criteria in which you would mark the status of an ADR as Proposed?*
+
+### Chapter 20: Analyzing Architecture Risk
+1. *What are the two dimensions of the risk assessment matrix?*
+2. *What are some ways to show direction of particular risk within a risk assessment?
+Can you think of other ways to indicate whether risk is getting better or worse?*
+3. *Why is it necessary for risk storming to be a collaborative exercise?*
+4. *Why is it necessary for the identification activity within risk storming to be an
+individual activity and not a collaborative one?*
+5. *What would you do if three participants identified risk as high (6) for a particular
+area of the architecture, but another participant identified it as only medium (3)?*
+6. *What risk rating (1-9) would you assign to unproven or unknown technologies?*
+
+### Chapter 21: Diagramming and Presenting Architecture
+1. *What is irrational artifact attachment, and why is it significant with respect to
+documenting and diagramming architecture?*
+2. *What do the 4 C’s refer to in the C4 modeling technique?*
+3. *When diagramming architecture, what do dotted lines between components mean?*
+4. *What is the bullet-riddled corpse anti-pattern? How can you avoid this anti-pattern when creating presentations?*
+5. *What are the two primary information channels a presenter has when giving a presentation?*
+
+### Chapter 22: Making Teams Effective
+1. *What are three types of architecture personalities? What type of boundary does each personality create?*
+2. *What are the five factors that go into determining the level of control you should exhibit on the team?*
+3. *What are three warning signs you can look at to determine if your team is getting too big?*
+4. *List three basic checklists that would be good for a development team.*
+
+### Chapter 23: Negotiation and Leadership Skills
+1. *Why is negotiation so important as an architect?*
+2. *Name some negotiation techniques when a business stakeholder insists on five nines of availability, 
+but only three nines are really needed.*
+3. *What can you derive from a business stakeholder telling you “I needed it yesterday”?*
+4. *Why is it important to save a discussion about time and cost for last in a negotiation?*
+5. *What is the divide-and-conquer rule? How can it be applied when negotiating
+architecture characteristics with a business stakeholder? Provide an example.*
+6. *List the 4 C’s of architecture.*
+7. *Explain why it is important for an architect to be both pragmatic and visionary.*
+8. *What are some techniques for managing and reducing the number of meetings you are invited to?*
+
+### Chapter 24: Developing a Career Path
+1. *What is the 20-minute rule, and when is it best to apply it?*
+2. *What are the four rings in the ThoughtWorks technology radar, and what do they mean? 
+How can they be applied to your radar?*
+3. *Describe the difference between depth and breadth of knowledge as it applies to software architects. 
+Which should architects aspire to maximize?*
