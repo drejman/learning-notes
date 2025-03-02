@@ -42,3 +42,15 @@
 - There is no silver bullet: empowering a knowledge-sharing culture requires a combination of multiple strategies, 
   and the exact mix that works best for your organization will likely change over time.
 
+### Chapter 4. Engineering for Equity
+- Bias is the default. 
+- Diversity is necessary to design properly for a comprehensive user base. 
+- Inclusivity is critical not just to improving the hiring pipeline for underrepresented groups, 
+  but to providing a truly supportive work environment for all people. 
+- Product velocity must be evaluated against providing a product that is truly useful to all users. 
+  It’s better to slow down than to release a product that might cause harm to some users.
+
+### Chapter 5. How to Lead a Team
+- Don’t “manage” in the traditional sense; focus on leadership, influence, and serving your team. 
+- Delegate where possible; don’t DIY (Do It Yourself). 
+- Pay particular attention to the focus, direction, and velocity of your team.
